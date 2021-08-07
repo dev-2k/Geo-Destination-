@@ -112,10 +112,11 @@ class _AddImageState extends State<AddImage> {
                       style: TextStyle(fontSize: 20.0),
                     ),
                   ),
-                  style: TextButton.styleFrom(primary: Colors.blueAccent),
+                  style: TextButton.styleFrom(primary: Colors.orange),
                 ),
                 FloatingActionButton(
                     child: Icon(Icons.add_location_alt),
+                    backgroundColor: Colors.deepOrangeAccent,
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -135,7 +136,7 @@ class _AddImageState extends State<AddImage> {
                 'Post',
                 style: TextStyle(fontSize: 20.0),
               ),
-              style: TextButton.styleFrom(primary: Colors.blueAccent),
+              style: TextButton.styleFrom(primary: Colors.deepOrange),
             ),
           ),
         ],

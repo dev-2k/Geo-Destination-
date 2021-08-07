@@ -150,6 +150,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(15.0),
               child: FloatingActionButton(
                   child: Icon(Icons.add_a_photo),
+                  backgroundColor: Colors.deepOrangeAccent,
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => AddImage()));
