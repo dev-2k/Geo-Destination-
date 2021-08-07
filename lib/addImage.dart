@@ -69,7 +69,10 @@ class _AddImageState extends State<AddImage> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Image(image: AssetImage('images/14.jpg')),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30.0),
+              child: Image.asset('images/14.jpg'),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
