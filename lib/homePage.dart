@@ -4,15 +4,15 @@ import 'addImage.dart';
 
 List<ImageDetails> _images = [
   ImageDetails(
-    imagePath: 'images/1.jpeg',
-    location: 'Angel Falls, Venezuela',
+    imagePath: 'images/16.jpg',
+    location: 'Lake Kawaguchi, Japan',
     photographer: 'Martin Andres',
     title: 'Traveling',
     details:
         'This image was taken during a party in New York on new years eve. Quite a colorful shot.',
   ),
   ImageDetails(
-    imagePath: 'images/2.jpeg',
+    imagePath: 'images/17.jpg',
     location: 'Antelope Canyon, Arizona',
     photographer: 'Abraham Costa',
     title: 'Traveling',
@@ -20,7 +20,7 @@ List<ImageDetails> _images = [
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/3.jpeg',
+    imagePath: 'images/18.jpg',
     location: 'Arashiyama Bamboo Grove, Japan',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
@@ -28,7 +28,7 @@ List<ImageDetails> _images = [
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/4.jpeg',
+    imagePath: 'images/1.jpg',
     location: 'Pamukkale, Turkey',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
@@ -36,39 +36,47 @@ List<ImageDetails> _images = [
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/5.jpeg',
-    location: 'Okavango Delta, Botswana',
+    imagePath: 'images/4.jpg',
+    location: 'Luna park Desenzano Del Garda',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
     details:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/6.jpeg',
-    location: 'Na Pali Coast, Hawaii',
+    imagePath: 'images/6.jpg',
+    location: 'Villa San Toma, Venice, Italy',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
     details:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/7.jpeg',
-    location: 'Mount Fuji, Japan',
+    imagePath: 'images/7.jpg',
+    location: 'Konark Sun Temple',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
     details:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/8.jpeg',
-    location: 'Mount Kilimanjaro, Tanzania',
+    imagePath: 'images/8.jpg',
+    location: 'Eiffel Tower, Paris',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
     details:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/9.jpeg',
+    imagePath: 'images/9.jpg',
+    location: 'Burj Al Arab',
+    photographer: 'Jamie Bryan',
+    title: 'Traveling',
+    details:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
+  ),
+  ImageDetails(
+    imagePath: 'images/10.jpg',
     location: 'Machu Picchu, Peru',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
@@ -76,15 +84,7 @@ List<ImageDetails> _images = [
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/10.jpeg',
-    location: 'Milford Sound, New Zealand',
-    photographer: 'Jamie Bryan',
-    title: 'New York',
-    details:
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
-  ),
-  ImageDetails(
-    imagePath: 'images/11.jpeg',
+    imagePath: 'images/11.jpg',
     location: 'Antarctica',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
@@ -92,7 +92,7 @@ List<ImageDetails> _images = [
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/12.jpeg',
+    imagePath: 'images/12.jpg',
     location: 'Halong Bay, Vietnam',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
@@ -100,7 +100,7 @@ List<ImageDetails> _images = [
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/13.jpeg',
+    imagePath: 'images/13.jpg',
     location: 'Lake Tekapo, New Zealand',
     photographer: 'Jamie Bryan',
     title: 'Traveling',
@@ -108,18 +108,18 @@ List<ImageDetails> _images = [
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/14.jpeg',
-    location: 'Lake Baikal, Russia',
+    imagePath: 'images/15.jpg',
+    location: 'Taj Mahal, Agra, India',
     photographer: 'Matthew',
     title: 'Traveling',
     details:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
   ImageDetails(
-    imagePath: 'images/15.jpeg',
+    imagePath: 'images/14.jpg',
     location: 'Ambala, 133001, India',
     photographer: 'Martin Sawyer',
-    title: 'Pink Ice Cream',
+    title: 'Home',
     details:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil error aspernatur, sequi inventore eligendi vitae dolorem animi suscipit. Nobis, cumque.',
   ),
@@ -173,9 +173,9 @@ class HomePage extends StatelessWidget {
                 ),
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
+                    crossAxisCount: 1,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 15,
                   ),
                   itemBuilder: (context, index) {
                     return RawMaterialButton(
