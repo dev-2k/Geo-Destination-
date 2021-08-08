@@ -13,7 +13,7 @@ class AddImage extends StatefulWidget {
 }
 
 class _AddImageState extends State<AddImage> {
-  String currentAddress = 'My Address';
+  String currentAddress = 'My Location';
   Position currentposition;
 
   Future<Position> _determinePosition() async {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'detailPage.dart';
 import 'addImage.dart';
+import 'timelineWebView.dart';
 
 List<ImageDetails> _images = [
   ImageDetails(
@@ -137,15 +138,33 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 70,
             ),
-            Text(
-              'TimeLine',
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
+
+            TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WebViewTimeline()));
+              },
+              child: Text(
+                'TimeLine',
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
+              style: TextButton.styleFrom(primary: Colors.orange),
             ),
+
+            // Text(
+            //   'TimeLine',
+            //   style: TextStyle(
+            //     fontSize: 35,
+            //     fontWeight: FontWeight.w600,
+            //     color: Colors.white,
+            //   ),
+            //   textAlign: TextAlign.center,
+            // ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: FloatingActionButton(
