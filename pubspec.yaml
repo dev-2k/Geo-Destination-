@@ -41,3 +41,6 @@ flutter:
       fonts:
         - asset: fonts/Sen-Regular.ttf
         - asset: fonts/Sen-Bold.ttf
+    - family: Billabong
+      fonts:
+        - asset: fonts/FontsFree-Net-Billabong.ttf

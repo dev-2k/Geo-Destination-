@@ -20,7 +20,16 @@ class TimeLine extends State<WebViewTimeline> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Geo Destination"),
+        title: Text(
+          "Geo Destination",
+          style: TextStyle(
+            fontSize: 25,
+            fontFamily: 'Billabong',
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
       body: WebView(
         initialUrl: 'https://timeline.google.com/maps/timeline',

@@ -147,8 +147,9 @@ class HomePage extends StatelessWidget {
               child: Text(
                 'TimeLine',
                 style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 55,
+                  fontFamily: 'Billabong',
+                  fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
