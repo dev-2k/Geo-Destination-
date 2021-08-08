@@ -17,3 +17,5 @@ This app lets you share your journey experiences all across the world complete w
 
 ## Execution of App
 https://user-images.githubusercontent.com/70647701/128626255-a8bd5980-e22b-45be-a33c-382cd2c10ce2.mp4
+
+## Please allow  access of gps for the Google maps to use location 
