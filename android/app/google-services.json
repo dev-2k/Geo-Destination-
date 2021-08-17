@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "952232506743",
+    "project_id": "geo-destination",
+    "storage_bucket": "geo-destination.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952232506743:android:26d58cfdd7a5fd627fdd72",
+        "android_client_info": {
+          "package_name": "com.example.image_location"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952232506743-63c239fdblhndg1invh01ap3j6092qhd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPsDULjzT9ufWR-7t4CK3xt5-UETjrBQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952232506743-63c239fdblhndg1invh01ap3j6092qhd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'webViewMap.dart';
+import 'package:uuid/uuid.dart';
+// import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
+final _firestore = FirebaseFirestore.instance;
+User loggedInUser;
 
 class AddImage extends StatefulWidget {
   @override
@@ -13,7 +20,11 @@ class AddImage extends StatefulWidget {
 }
 
 class _AddImageState extends State<AddImage> {
-  String currentAddress = 'My Location';
+  TextEditingController descriptionTextEditingController =
+      TextEditingController();
+  TextEditingController locationTextEditingController = TextEditingController();
+
+  String currentAddress = '';
   Position currentposition;
 
   Future<Position> _determinePosition() async {
@@ -51,106 +62,229 @@ class _AddImageState extends State<AddImage> {
       setState(() {
         currentposition = position;
         currentAddress =
-            "${place.locality}, ${place.postalCode}, ${place.country}";
+            "${place.locality}, ${place.administrativeArea}, ${place.country}";
+        locationTextEditingController.text = currentAddress;
       });
     } catch (e) {
       print(e);
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  // File file;
+  PickedFile _imageFile;
+  final ImagePicker _picker = ImagePicker();
+  bool uploading = false;
+  String postId = Uuid().v4();
+
+  Widget bottomSheet() {
+    return Container(
+      height: 120,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 25,
+      ),
+      child: Column(
+        children: [
+          Text(
+            'Choose Photo',
+            style: TextStyle(fontSize: 25),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FlatButton.icon(
+                  onPressed: () {
+                    takePhoto(ImageSource.camera);
+                  },
+                  icon: Icon(
+                    Icons.camera,
+                    size: 30,
+                  ),
+                  label: Text(
+                    'Camera',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                FlatButton.icon(
+                  onPressed: () {
+                    takePhoto(ImageSource.gallery);
+                  },
+                  icon: Icon(
+                    Icons.photo_library_outlined,
+                    size: 30,
+                  ),
+                  label: Text('Gallery', style: TextStyle(fontSize: 20)),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  takePhoto(ImageSource source) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+
+    setState(() {
+      _imageFile = pickedFile;
+    });
+  }
+
+  displayUploadFormScreen() {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        foregroundColor: Colors.white,
         title: Text(
           'Geo Destination',
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 30,
             fontFamily: 'Billabong',
             fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
           textAlign: TextAlign.center,
         ),
+        actions: [
+          FlatButton(
+              onPressed: () {},
+              child: Icon(
+                Icons.share,
+                color: Colors.red,
+              ))
+        ],
+        centerTitle: true,
       ),
-      body: Center(
-          child: Column(
+      body: ListView(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.0),
-              child: Image.asset('images/14.jpg'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              currentAddress,
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ),
-          currentposition != null
-              ? Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    'Latitude = ' + currentposition.latitude.toString(),
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                )
-              : Container(),
-          currentposition != null
-              ? Text(
-                  'Longitude = ' + currentposition.longitude.toString(),
-                  style: TextStyle(fontSize: 20.0),
-                )
-              : Container(),
-          Center(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    _determinePosition();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      'Locate me',
-                      style: TextStyle(fontSize: 20.0),
+          Container(
+            height: 250,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      image: DecorationImage(
+                        image: _imageFile == null
+                            ? AssetImage('images/add.png')
+                            : FileImage(File(_imageFile.path)),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                  style: TextButton.styleFrom(primary: Colors.orange),
                 ),
-                FloatingActionButton(
-                    child: Icon(Icons.add_location_alt),
-                    backgroundColor: Colors.deepOrangeAccent,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WebViewExample()));
-                    }),
-              ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: TextButton(
+          Container(
+            width: 220,
+            height: 50,
+            alignment: Alignment.center,
+            child: RaisedButton.icon(
               onPressed: () {
+                showModalBottomSheet(
+                    context: context, builder: ((builder) => bottomSheet()));
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(35)),
+              color: Colors.red,
+              icon: Icon(Icons.add_a_photo_rounded),
+              label: Text(
+                'Add Image',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ListTile(
+            leading: Icon(Icons.description_outlined),
+            title: Container(
+              width: 250,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+                controller: descriptionTextEditingController,
+                decoration: InputDecoration(
+                  hintText: 'Say something about image.',
+                  hintStyle: TextStyle(color: Colors.black54),
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.location_history),
+            title: Container(
+              width: 250,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+                controller: locationTextEditingController,
+                decoration: InputDecoration(
+                  hintText: 'Write your location',
+                  hintStyle: TextStyle(color: Colors.black54),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: 220,
+            height: 110,
+            alignment: Alignment.center,
+            child: RaisedButton.icon(
+                onPressed: _determinePosition,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35)),
+                color: Colors.red,
+                icon: Icon(Icons.location_history_rounded),
+                label: Text(
+                  'Get my location',
+                  style: TextStyle(fontSize: 20),
+                )),
+          ),
+          Container(
+            width: 120,
+            height: 110,
+            padding: EdgeInsets.all(20),
+            alignment: Alignment.bottomRight,
+            child: RaisedButton.icon(
+              onPressed: () {
+                // controlUploadAndSave();
                 _showToast(context);
               },
-              child: Text(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(35)),
+              color: Colors.greenAccent,
+              label: Text(
                 'Post',
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontSize: 20),
               ),
-              style: TextButton.styleFrom(primary: Colors.deepOrange),
+              icon: Icon(Icons.send_outlined),
             ),
           ),
         ],
-      )),
+      ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return displayUploadFormScreen();
   }
 
   void _showToast(BuildContext context) {
@@ -163,4 +297,8 @@ class _AddImageState extends State<AddImage> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => throw UnimplementedError();
 }
