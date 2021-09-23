@@ -5,11 +5,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 // import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
 
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
@@ -23,9 +26,12 @@ class _AddImageState extends State<AddImage> {
   TextEditingController descriptionTextEditingController =
       TextEditingController();
   TextEditingController locationTextEditingController = TextEditingController();
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  Future<File> savedImageFile;
 
   String currentAddress = '';
   Position currentposition;
+  String url;
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
@@ -264,7 +270,7 @@ class _AddImageState extends State<AddImage> {
             alignment: Alignment.bottomRight,
             child: RaisedButton.icon(
               onPressed: () {
-                // controlUploadAndSave();
+                controlUploadAndSave();
                 _showToast(context);
               },
               shape: RoundedRectangleBorder(
@@ -301,4 +307,18 @@ class _AddImageState extends State<AddImage> {
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => throw UnimplementedError();
+
+  controlUploadAndSave() async {
+    Reference firebaseStorageReference =
+        FirebaseStorage.instance.ref().child(_imageFile.path);
+    UploadTask uploadTask =
+        firebaseStorageReference.putFile(_imageFile as File);
+    uploadTask.whenComplete(() {
+      url = firebaseStorageReference.getDownloadURL() as String;
+    }).catchError((onError) {
+      print(onError);
+    });
+
+    // dynamic result = DatabaseService(uid: loggedInUser.uid).uploadPhotos(url);
+  }
 }

@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextField(
                   textAlign: TextAlign.center,
                   cursorColor: Colors.black,
+                  keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {
                     email = value;
                   },

@@ -3,10 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:async';
 
-final _firestore = FirebaseFirestore.instance;
+FirebaseFirestore firestore = FirebaseFirestore.instance;
 User loggedInUser;
-String userEmail;
+String username = null;
+String userEmail = null;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -29,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
       final user = await _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        userEmail = loggedInUser.email;
+        // userEmail = loggedInUser.email;
       }
     } catch (e) {
       print(e);
@@ -51,7 +55,8 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(
               height: 40,
             ),
-            emailProfile(),
+            // emailProfile(),
+            userProfile(),
           ],
         ),
       ),
@@ -139,21 +144,12 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  Widget emailProfile() {
+  Widget userProfile() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'UserName : ' + userEmail,
-            style: TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Billabong',
-            ),
-          ),
-        ],
+        children: [],
       ),
     );
   }
